@@ -1,7 +1,13 @@
 ./vendor/bin/phpstan
 if [ $? -ne 0 ]; then
     echo "Opa! Deu ruim aqui com o PHPStan. Arrume antes de continuar..."
-    exit;
+    exit 1;
+fi
+
+php artisan test --parallel
+if [ $? -ne 0 ]; then
+    echo "Opa! Existe um teste com erro. Arrume antes de continuar..."
+    exit 1;
 fi
 
 STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep ".php\{0,1\}$") || true
