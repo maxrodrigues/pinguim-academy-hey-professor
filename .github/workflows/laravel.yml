@@ -33,11 +33,11 @@ jobs:
         mkdir -p database
         touch database/database.sqlite
 
-    - name: Create package.json
-      run: npm install 
-        
+    - name: Installing Package.json
+      run: npm install
+      
     - name: Build Assets
-      run: vite build
+      run: npm run build
         
     - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
       env:
