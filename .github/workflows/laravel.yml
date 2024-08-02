@@ -33,6 +33,9 @@ jobs:
         mkdir -p database
         touch database/database.sqlite
         
+    - name: Build Assets
+      run: vite build
+        
     - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
       env:
         DB_CONNECTION: sqlite
