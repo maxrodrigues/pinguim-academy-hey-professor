@@ -1,5 +1,5 @@
-./vendor/bin/phpstan
-exit 1
+echo "testing pre-commit";
+exit 1;
 
 #if [ $? -ne 0 ]; then
 #    echo "Opa! Deu ruim aqui com o PHPStan. Arrume antes de continuar..."
