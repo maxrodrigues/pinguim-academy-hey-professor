@@ -1,4 +1,5 @@
-echo "\ntesting pre-commit";
+echo
+echo "testing pre-commit";
 exit 1
 
 #if [ $? -ne 0 ]; then
