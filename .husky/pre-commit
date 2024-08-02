@@ -4,7 +4,7 @@
 #    echo "Opa! Deu ruim aqui com o PHPStan. Arrume antes de continuar..."
 #    exit;
 #fi
-
+#
 #STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep ".php\{0,1\}$") || true
 
 #for FILE in $STAGED_FILES
