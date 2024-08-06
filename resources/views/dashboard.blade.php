@@ -5,13 +5,15 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
+    <x-container>
+        <div>
+            <x-form post :action="route('questions.store')">
+                <div class="mb-4">
+                    <x-textarea label="Question" name="question"/>
                 </div>
-            </div>
+                <x-button.primary type="submit" label="Save" />
+                <x-button.second type="reset" label="Cancel" />
+            </x-form>
         </div>
-    </div>
+    </x-container>
 </x-app-layout>
