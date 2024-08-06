@@ -4,7 +4,7 @@ if [ $? -ne 0 ]; then
     exit 1;
 fi
 
-php artisan test --parallel
+./vendor/bin/pest --parallel --compact
 if [ $? -ne 0 ]; then
     echo "Opa! Existe um teste com erro. Arrume antes de continuar..."
     exit 1;
