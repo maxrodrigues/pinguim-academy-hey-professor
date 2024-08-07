@@ -18,7 +18,7 @@
             </span>
         </div>
         <div class="flex flex-col items-center text-red-600">
-            <x-form :action="route('questions.like', $question)">
+            <x-form :action="route('questions.unlike', $question)">
                 <button type="submit">
                     <x-icons.thumbs-down class="w-5 h-5 text-red-600 hover:text-red-900 cursor-pointer" />
                 </button>

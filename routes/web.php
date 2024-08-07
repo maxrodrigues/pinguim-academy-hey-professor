@@ -26,3 +26,4 @@ require __DIR__ . '/auth.php';
 
 Route::post('questions/store', [QuestionController::class, 'store'])->name('questions.store');
 Route::post('question/like/{question}', Question\LikeController::class)->name('questions.like');
+Route::post('question/unlike/{question}', Question\UnLikeController::class)->name('questions.unlike');

@@ -30,3 +30,30 @@ it('should be not able to like more than 1 time', function () {
 
     assertDatabaseCount('votes', 1);
 });
+
+it('should be able to unlike a question', function () {
+    $user     = User::factory()->create();
+    $question = Question::factory()->create();
+    actingAs($user);
+
+    $this->post(route('questions.unlike', $question))
+        ->assertRedirect();
+
+    assertDatabaseHas('votes', [
+        'question_id' => $question->id,
+        'user_id'     => $user->id,
+        'like'        => 0,
+        'unlike'      => 1,
+    ]);
+});
+
+it('should be not able to unlike more than 1 time', function () {
+    $user     = User::factory()->create();
+    $question = Question::factory()->create();
+    actingAs($user);
+
+    $this->post(route('questions.unlike', $question));
+    $this->post(route('questions.unlike', $question));
+
+    assertDatabaseCount('votes', 1);
+});
