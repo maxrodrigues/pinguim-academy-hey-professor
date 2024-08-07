@@ -14,7 +14,7 @@
                 </button>
             </x-form>
             <span>
-                {{ $question->likes }}
+                {{ $question->votes_sum_like ?? 0 }}
             </span>
         </div>
         <div class="flex flex-col items-center text-red-600">
@@ -24,7 +24,7 @@
                 </button>
             </x-form>
             <span>
-                {{ $question->unlikes }}
+                {{ $question->votes_sum_unlike ?? 0 }}
             </span>
         </div>
     </div>
