@@ -1,11 +1,13 @@
 <?php
 
-use function Pest\Laravel\assertDatabaseHas;
+use App\Models\{Question, User};
+
+use function Pest\Laravel\{actingAs, assertDatabaseCount, assertDatabaseHas};
 
 it('should be able to like a question', function () {
-    $user     = \App\Models\User::factory()->create();
-    $question = \App\Models\Question::factory()->create();
-    \Pest\Laravel\actingAs($user);
+    $user     = User::factory()->create();
+    $question = Question::factory()->create();
+    actingAs($user);
 
     $this->post(route('questions.like', $question))
         ->assertRedirect();
@@ -16,4 +18,15 @@ it('should be able to like a question', function () {
         'like'        => 1,
         'unlike'      => 0,
     ]);
+});
+
+it('should be not able to like more than 1 time', function () {
+    $user     = User::factory()->create();
+    $question = Question::factory()->create();
+    actingAs($user);
+
+    $this->post(route('questions.like', $question));
+    $this->post(route('questions.like', $question));
+
+    assertDatabaseCount('votes', 1);
 });
