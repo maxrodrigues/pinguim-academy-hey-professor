@@ -46,8 +46,14 @@ it('should create as a draft all the time', function () {
     actingAs($user);
 
     $request = $this->post(route('questions.store'), [
-        'question' => str_repeat('A', 20) . '?',
+        'question' => str_repeat('*', 20) . '?',
     ]);
 
-    assertDatabaseHas('questions', ['question' => str_repeat('A', 20) . '?', 'is_draft' => true]);
+    assertDatabaseHas('questions', ['question' => str_repeat('*', 20) . '?', 'is_draft' => true]);
+});
+
+test('only authenticated user can create a question', function () {
+    $this->post(route('questions.store'), [
+        'question' => str_repeat('*', 20) . '?',
+    ])->assertRedirect(route('login'));
 });
