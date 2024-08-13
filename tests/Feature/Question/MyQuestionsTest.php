@@ -1,16 +1,18 @@
 <?php
 
+use App\Models\{Question, User};
+
 use function Pest\Laravel\actingAs;
 
 it('should be able to list all questions created by me', function () {
-    $wrongUser      = \App\Models\User::factory()->create();
-    $wrongQuestions = \App\Models\Question::factory()
+    $wrongUser      = User::factory()->create();
+    $wrongQuestions = Question::factory()
         ->for($wrongUser, 'createdBy')
         ->count(17)
         ->create();
 
-    $user      = \App\Models\User::factory()->create();
-    $questions = \App\Models\Question::factory()
+    $user      = User::factory()->create();
+    $questions = Question::factory()
         ->for($user, 'createdBy')
         ->count(7)
         ->create();

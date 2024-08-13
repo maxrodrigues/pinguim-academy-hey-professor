@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Question;
-use App\Http\Controllers\{ProfileController, QuestionController};
+use App\Http\Controllers\{DashboardController, ProfileController, QuestionController};
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,7 +14,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', \App\Http\Controllers\DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     #region Profile Controller
