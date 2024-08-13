@@ -40,3 +40,14 @@ it('should check if ends with question mark ?', function () {
     $request->assertSessionHasErrors(['question' => 'Are you sure that is a question? It is missing the question mark in the end.']);
     assertDatabaseCount('questions', 0);
 });
+
+it('should create as a draft all the time', function () {
+    $user = User::factory()->create();
+    actingAs($user);
+
+    $request = $this->post(route('questions.store'), [
+        'question' => str_repeat('A', 20) . '?',
+    ]);
+
+    assertDatabaseHas('questions', ['question' => str_repeat('A', 20) . '?', 'is_draft' => true]);
+});
