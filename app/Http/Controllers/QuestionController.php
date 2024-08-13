@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Question;
 use App\Rules\EndWithQuestionMarkRule;
 use Illuminate\Http\{RedirectResponse};
 
@@ -14,10 +13,12 @@ class QuestionController extends Controller
             'question' => ['required', 'min:10', new EndWithQuestionMarkRule()],
         ]);
 
-        $question = Question::query()->create([
-            'question' => request()->question,
-            'is_draft' => true,
-        ]);
+        user()
+            ->questions()
+            ->create([
+                'question' => request()->question,
+                'is_draft' => true,
+            ]);
 
         return to_route('dashboard');
     }
