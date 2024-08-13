@@ -21,10 +21,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
     #endregion
 
     #region Questions Controller
     Route::group(['prefix' => 'questions', 'as' => 'questions.'], function () {
+        Route::get('/', [QuestionController::class, 'index'])->name('index');
         Route::post('store', [QuestionController::class, 'store'])->name('store');
         Route::post('like/{question}', Question\LikeController::class)->name('like');
         Route::post('unlike/{question}', Question\UnLikeController::class)->name('unlike');
