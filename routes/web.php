@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'questions', 'as' => 'questions.'], function () {
         Route::get('/', [QuestionController::class, 'index'])->name('index');
         Route::post('store', [QuestionController::class, 'store'])->name('store');
+        Route::delete('{question}', [QuestionController::class, 'destroy'])->name('delete');
         Route::post('like/{question}', Question\LikeController::class)->name('like');
         Route::post('unlike/{question}', Question\UnLikeController::class)->name('unlike');
         Route::put('publish/{question}', Question\PublishController::class)->name('publish');

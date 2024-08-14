@@ -18,11 +18,73 @@
         <hr class="border-gray-500 my-4"/>
         <div>
             <h1 class="text-3xl text-center dark:text-white">My Questions</h1>
-            <div class="">
-                @foreach($questions as $question)
-                    <x-question :question="$question" />
-                @endforeach
+
+            <div class="my-5">
+                <span class="text-gray-400 font-semibold text-xl">
+                    Draft Questions
+                </span>
+                <x-table>
+                    <x-table.thead>
+                        <tr>
+                            <x-table.th>Question</x-table.th>
+                            <x-table.th>Actions</x-table.th>
+                        </tr>
+                    </x-table.thead>
+                    <tbody>
+                    @foreach($questions->where('is_draft', true) as $question)
+                        <x-table.tr>
+                            <x-table.td>
+                                {{ $question->question }}
+                            </x-table.td>
+                            <x-table.td>
+                                {{--                                    deletar--}}
+                                <x-form :action="route('questions.publish', $question)" put>
+                                    <button type="submit">
+                                        Publicar
+                                    </button>
+                                </x-form>
+                            </x-table.td>
+                        </x-table.tr>
+                    @endforeach
+                    </tbody>
+                </x-table>
             </div>
+
+            <div class="my-5">
+                <span class="text-gray-400 font-semibold text-xl">
+                    Published Questions
+                </span>
+                <x-table>
+                    <x-table.thead>
+                        <tr>
+                            <x-table.th>Question</x-table.th>
+                            <x-table.th>Actions</x-table.th>
+                        </tr>
+                    </x-table.thead>
+                    <tbody>
+                        @foreach($questions->where('is_draft', false) as $question)
+                            <x-table.tr>
+                                <x-table.td>
+                                    {{ $question->question }}
+                                </x-table.td>
+                                <x-table.td>
+                                    <x-form :action="route('questions.delete', $question)" delete>
+                                        <button type="submit">
+                                            Deletar
+                                        </button>
+                                    </x-form>
+                                    <x-form :action="route('questions.publish', $question)" put>
+                                        <button type="submit">
+                                            Publicar
+                                        </button>
+                                    </x-form>
+                                </x-table.td>
+                            </x-table.tr>
+                        @endforeach
+                    </tbody>
+                </x-table>
+            </div>
+
         </div>
     </x-container>
 </x-app-layout>
